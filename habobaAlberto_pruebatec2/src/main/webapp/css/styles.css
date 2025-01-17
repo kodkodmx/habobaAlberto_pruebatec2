@@ -1,0 +1,103 @@
+body {
+  background-color: black;
+  background-image: radial-gradient(
+    rgba(0, 150, 0, 0.75), black 120%
+  );
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  padding: 2rem;
+  color: white;
+  font: 1.3rem Inconsolata, monospace;
+  text-shadow: 0 0 5px #C8C8C8;
+}
+
+.typewriter h1 {
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .42em;
+  animation: 
+    escribiendo 3.5s steps(30, end),
+    cursor 0.5s step-end infinite,
+    oculta 3.5s forwards; 
+}
+
+.typewriter h2 {
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .42em;
+  opacity: 0;  
+  visibility: hidden;  
+  animation: 
+    escribiendo 3.5s steps(30, end) 3.5s,  
+    cursor 0.5s step-end infinite,
+    muestraH2 0s forwards 3.5s; 
+}
+
+@keyframes escribiendo {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes cursor {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+
+@keyframes oculta {
+  0% {
+    border-color: orange;
+  }
+  100% {
+    border-color: transparent; 
+  }
+}
+
+@keyframes muestraH2 {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1; 
+  }
+}
+
+#retardo7 {
+    opacity: 0;
+    visibility: hidden; 
+    animation: aparecer 0s 7s forwards; 
+}
+
+@keyframes aparecer {
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+#retardo4 {
+    opacity: 0;
+    visibility: hidden; 
+    animation: aparecer 0s 4s forwards; 
+}
+
+@keyframes aparecer {
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+footer {
+  position: absolute;  
+  bottom: 0;          
+  width: 100%;         
+  text-align: center;
+  padding: 10px 0;
+}
