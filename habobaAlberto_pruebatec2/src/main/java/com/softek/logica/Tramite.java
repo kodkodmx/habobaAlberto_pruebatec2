@@ -3,41 +3,31 @@ package com.softek.logica;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
-public class Usuario implements Serializable {
+public class Tramite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private String password;
 
-    @OneToMany(mappedBy = "elUsuario")
+    private String nombre;
+    private String descripcion;
+
+    @OneToMany(mappedBy = "elTramite")
     private List<Turno> turnos;
 
     @Column(nullable = false)
     private boolean disponible;
-    
-    
 
-    public Usuario() {
+    
+    public Tramite() {
     }
-
     
-    public Usuario(String nombre, String apellido, String email, String password) {
+    public Tramite(String nombre, String descripcion, List<Turno> turnos, boolean disponible) {
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.password = password;
+        this.descripcion = descripcion;
         this.turnos = new ArrayList<>();  
         this.disponible = true;
     }
@@ -58,28 +48,12 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public List<Turno> getTurnos() {
@@ -101,4 +75,5 @@ public class Usuario implements Serializable {
     
     
 
+    
 }

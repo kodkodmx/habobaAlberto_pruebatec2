@@ -13,34 +13,31 @@ import javax.servlet.http.HttpSession;
 public class LoginSv extends HttpServlet {
 
     ControladoraLogica control = new ControladoraLogica();
-    
-      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        
-        boolean autorizado = control.validarAcceso(email,password);
-        
-        if (autorizado == true) {
+        String animacion = request.getParameter("animacion");
+
+        boolean autorizado = control.validarAcceso(email, password);
+
+        if (autorizado) {
             HttpSession miSesion = request.getSession();
             miSesion.setAttribute("email", email);
-            response.sendRedirect("login.jsp");
-        }
-        else {
-            response.sendRedirect("login.jsp");
+
+            String cssFile = "si".equals(animacion) ? "styles.css" : "stylesLight.css";
+            miSesion.setAttribute("css", cssFile);
+
+            response.sendRedirect("index.jsp");
+        } else {
+            response.sendRedirect("login.jsp?mens=Credenciales invalidas!");
         }
     }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet de inicio de sesión";
+    }
 }

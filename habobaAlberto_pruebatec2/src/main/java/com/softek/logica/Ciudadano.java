@@ -3,41 +3,32 @@ package com.softek.logica;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
-public class Usuario implements Serializable {
+public class Ciudadano implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nombre;
     private String apellido;
-    private String email;
-    private String password;
+    private String claveIdentificacion;
 
-    @OneToMany(mappedBy = "elUsuario")
+    @OneToMany(mappedBy = "elCiudadano")
     private List<Turno> turnos;
 
     @Column(nullable = false)
     private boolean disponible;
-    
-    
 
-    public Usuario() {
+    public Ciudadano() {
     }
 
-    
-    public Usuario(String nombre, String apellido, String email, String password) {
+    public Ciudadano(String nombre, String apellido, String claveIdentificacion, List<Turno> turnos, boolean disponible) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.email = email;
-        this.password = password;
+        this.claveIdentificacion = claveIdentificacion;
         this.turnos = new ArrayList<>();  
         this.disponible = true;
     }
@@ -66,20 +57,12 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
     }
 
-    public String getEmail() {
-        return email;
+    public String getClaveIdentificacion() {
+        return claveIdentificacion;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setClaveIdentificacion(String claveIdentificacion) {
+        this.claveIdentificacion = claveIdentificacion;
     }
 
     public List<Turno> getTurnos() {
@@ -97,7 +80,6 @@ public class Usuario implements Serializable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-
     
     
 

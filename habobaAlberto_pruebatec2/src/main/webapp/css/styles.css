@@ -1,77 +1,97 @@
 body {
-  background-color: black;
-  background-image: radial-gradient(
-    rgba(0, 150, 0, 0.75), black 120%
-  );
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-  padding: 2rem;
-  color: white;
-  font: 1.3rem Inconsolata, monospace;
-  text-shadow: 0 0 5px #C8C8C8;
+    background-color: black;
+    background-image: radial-gradient(
+        rgba(0, 150, 0, 0.75), black 120%
+    );
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    padding: 2rem;
+    color: white;
+    font: 1.3rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+}
+
+.animacion-label {
+    margin-right: 10px;
+}
+
+.animacion-option {
+    margin-left: 10px;
+}
+
+input[type="submit"] {
+    margin-left: 10px;
 }
 
 .typewriter h1 {
-  overflow: hidden;
-  border-right: .15em solid orange;
-  white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: .42em;
-  animation: 
-    escribiendo 3.5s steps(30, end),
-    cursor 0.5s step-end infinite,
-    oculta 3.5s forwards; 
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .42em;
+    animation:
+        escribiendo 3.5s steps(30, end),
+        cursor 0.5s step-end infinite,
+        oculta 3.5s forwards;
 }
 
 .typewriter h2 {
-  overflow: hidden;
-  border-right: .15em solid orange;
-  white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: .42em;
-  opacity: 0;  
-  visibility: hidden;  
-  animation: 
-    escribiendo 3.5s steps(30, end) 3.5s,  
-    cursor 0.5s step-end infinite,
-    muestraH2 0s forwards 3.5s; 
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .42em;
+    opacity: 0;
+    visibility: hidden;
+    animation:
+        escribiendo 3.5s steps(30, end) 3.5s,
+        cursor 0.5s step-end infinite,
+        muestraH2 0s forwards 3.5s;
 }
 
 @keyframes escribiendo {
-  from { width: 0 }
-  to { width: 100% }
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
 }
 
 @keyframes cursor {
-  from, to { border-color: transparent }
-  50% { border-color: orange }
+    from, to {
+        border-color: transparent
+    }
+    50% {
+        border-color: orange
+    }
 }
 
 @keyframes oculta {
-  0% {
-    border-color: orange;
-  }
-  100% {
-    border-color: transparent; 
-  }
+    0% {
+        border-color: orange;
+    }
+    100% {
+        border-color: transparent;
+    }
 }
 
 @keyframes muestraH2 {
-  0% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  100% {
-    visibility: visible;
-    opacity: 1; 
-  }
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 #retardo7 {
     opacity: 0;
-    visibility: hidden; 
-    animation: aparecer 0s 7s forwards; 
+    visibility: hidden;
+    animation: aparecer 0s 7s forwards;
 }
 
 @keyframes aparecer {
@@ -83,8 +103,8 @@ body {
 
 #retardo4 {
     opacity: 0;
-    visibility: hidden; 
-    animation: aparecer 0s 4s forwards; 
+    visibility: hidden;
+    animation: aparecer 0s 4s forwards;
 }
 
 @keyframes aparecer {
@@ -94,10 +114,56 @@ body {
     }
 }
 
+#alerta {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.botonrojo{
+  background-color: red;
+  color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Inconsolata, monospace;
+    color: #00FF00;
+    border: 1px dashed #00FF00;
+    margin-top: 2rem;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: left;
+    border: 1px dashed #00FF00;
+}
+
+thead {
+    background-color: rgba(0, 150, 0, 0.75);
+    color: black;
+    text-shadow: none;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(0, 75, 0, 0.5);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(0, 100, 0, 0.25);
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 150, 0, 0.75);
+    color: black; 
+}
+
 footer {
-  position: absolute;  
-  bottom: 0;          
-  width: 100%;         
-  text-align: center;
-  padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
 }

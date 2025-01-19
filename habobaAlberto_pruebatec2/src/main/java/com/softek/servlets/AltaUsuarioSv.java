@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "UsuarioSv", urlPatterns = {"/UsuarioSv"})
+@WebServlet(name = "AltaUsuarioSv", urlPatterns = {"/AltaUsuarioSv"})
 public class AltaUsuarioSv extends HttpServlet {
     
     ControladoraLogica control = new ControladoraLogica();
@@ -22,13 +22,14 @@ public class AltaUsuarioSv extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
-        control.crearUsuario(email, password);
+        control.crearUsuario(nombre, apellido, email, password);
        
-        //cuando termine el alta, redirija de nuevo al index
-        response.sendRedirect("gestionarUsuarios.jsp");
+        response.sendRedirect("index.jsp?mens=Alta Exitosa!");
         
     }
 

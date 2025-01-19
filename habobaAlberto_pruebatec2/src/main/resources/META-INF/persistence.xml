@@ -3,6 +3,10 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="pruebatec2PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.softek.logica.Usuario</class>
+    <class>com.softek.logica.Ciudadano</class>
+    <class>com.softek.logica.Tramite</class>
+    <class>com.softek.logica.Turno</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/turnero?serverTimezone=UTC"/>

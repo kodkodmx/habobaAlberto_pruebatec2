@@ -1,0 +1,83 @@
+body {
+    background-color: black;
+    background-image: radial-gradient(
+        rgba(0, 150, 0, 0.75), black 120%
+        );
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    padding: 2rem;
+    color: white;
+    font: 1.3rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+}
+
+.animacion-label {
+    margin-right: 10px;
+}
+
+.animacion-option {
+    margin-left: 10px;
+}
+
+input[type="submit"] {
+    margin-left: 10px;
+}
+
+#alerta {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+h1{
+    margin: 0 auto;
+    margin-bottom: -20px;
+}
+
+.botonrojo{
+  background-color: red;
+  color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Inconsolata, monospace;
+    color: #00FF00;
+    border: 1px dashed #00FF00;
+    margin-top: 2rem;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: left;
+    border: 1px dashed #00FF00;
+}
+
+thead {
+    background-color: rgba(0, 150, 0, 0.75);
+    color: black;
+    text-shadow: none;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(0, 75, 0, 0.5);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(0, 100, 0, 0.25);
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 150, 0, 0.75);
+    color: black; 
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}

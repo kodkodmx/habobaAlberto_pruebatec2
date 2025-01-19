@@ -1,6 +1,7 @@
-package com.softek.logica;
+package com.softek.persistencia;
 
-import com.softek.logica.exceptions.NonexistentEntityException;
+import com.softek.logica.Usuario;
+import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -11,7 +12,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 
 public class UsuarioJpaController implements Serializable {
 
@@ -52,7 +52,7 @@ public class UsuarioJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = usuario.getId();
+                long id = usuario.getId();
                 if (findUsuario(id) == null) {
                     throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
                 }
@@ -65,7 +65,7 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -110,7 +110,7 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public Usuario findUsuario(Long id) {
+    public Usuario findUsuario(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Usuario.class, id);
@@ -131,13 +131,12 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-
-    public Usuario findUserByEmail(String email) {
+    
+    Usuario findUserByEmail(String email) {
              
         EntityManager em =getEntityManager();
         
         try {
-            //consulta JPQL para buscar por apellido
             String consulta = "SELECT usu FROM Usuario usu WHERE usu.email = :email";
             Query query = em.createQuery(consulta);
             query.setParameter("email",email);
@@ -150,5 +149,14 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
+    public List<Usuario> findAllUsuarios() {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     
 }
