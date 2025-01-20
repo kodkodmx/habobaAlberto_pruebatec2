@@ -1,8 +1,6 @@
 body {
     background-color: black;
-    background-image: radial-gradient(
-        rgba(0, 150, 0, 0.75), black 120%
-    );
+    background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -30,10 +28,7 @@ input[type="submit"] {
     white-space: nowrap;
     margin: 0 auto;
     letter-spacing: .42em;
-    animation:
-        escribiendo 3.5s steps(30, end),
-        cursor 0.5s step-end infinite,
-        oculta 3.5s forwards;
+    animation: escribiendo 3.5s steps(30, end), cursor 0.5s step-end infinite, oculta 3.5s forwards;
 }
 
 .typewriter h2 {
@@ -44,10 +39,7 @@ input[type="submit"] {
     letter-spacing: .42em;
     opacity: 0;
     visibility: hidden;
-    animation:
-        escribiendo 3.5s steps(30, end) 3.5s,
-        cursor 0.5s step-end infinite,
-        muestraH2 0s forwards 3.5s;
+    animation: escribiendo 3.5s steps(30, end) 3.5s, cursor 0.5s step-end infinite, muestraH2 0s forwards 3.5s;
 }
 
 @keyframes escribiendo {
@@ -88,7 +80,7 @@ input[type="submit"] {
     }
 }
 
-#retardo7 {
+#retardo7, #retardo4 {
     opacity: 0;
     visibility: hidden;
     animation: aparecer 0s 7s forwards;
@@ -101,17 +93,49 @@ input[type="submit"] {
     }
 }
 
-#retardo4 {
-    opacity: 0;
-    visibility: hidden;
-    animation: aparecer 0s 4s forwards;
+.button-container {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-@keyframes aparecer {
-    100% {
-        opacity: 1;
-        visibility: visible;
-    }
+.button {
+    padding: 10px 20px;
+    font-family: "Inconsolata", monospace;
+    font-size: 1rem;
+    background-color: #151515;
+    color: white;
+    border: 1px dashed #00ff00;
+    cursor: pointer;
+    text-shadow: 0 0 5px #00ff00;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: #00ff00;
+    color: black;
+}
+
+fieldset {
+    border: 1px dashed #00ff00;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+legend {
+    color: #00ff00;
+    font-family: "Inconsolata", monospace;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px #00ff00;
+    padding: 0 10px;
+}
+
+fieldset:hover {
+    border-color: #00cc00;
+    transition: border-color 0.3s;
 }
 
 #alerta {
@@ -120,9 +144,29 @@ input[type="submit"] {
     margin-bottom: 10px;
 }
 
-.botonrojo{
-  background-color: red;
-  color: white;
+input[type="submit"],
+button[type="submit"] {
+    background-color: #00ff00;
+    color: black;
+    border: 2px solid #00cc00;
+    padding: 10px 20px;
+    font-family: "Inconsolata", monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    text-shadow: 0 0 5px #00ff00;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+    background-color: black;
+    color: #00ff00;
+    border-color: #00ff00;
+}
+
+.botonrojo {
+    background-color: red;
+    color: white;
 }
 
 table {
@@ -157,7 +201,7 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background-color: rgba(0, 150, 0, 0.75);
-    color: black; 
+    color: black;
 }
 
 footer {

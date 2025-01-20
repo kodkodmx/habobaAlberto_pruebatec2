@@ -1,6 +1,7 @@
 package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
+import com.softek.logica.Tramite;
 import com.softek.logica.Usuario;
 import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.IOException;
@@ -13,22 +14,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "BajaUsuarioSv", urlPatterns = {"/BajaUsuarioSv"})
-public class BajaUsuarioSv extends HttpServlet {
+@WebServlet(name = "BajaTramiteSv", urlPatterns = {"/BajaTramiteSv"})
+public class BajaTramiteSv extends HttpServlet {
 
     private final ControladoraLogica control = new ControladoraLogica();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        Usuario usuario = control.buscaUsuario(email);
+        String nombre = request.getParameter("nombre");
+        Tramite tramite = control.buscaTramite(nombre);
         HttpSession miSesion = request.getSession();
-        if (usuario != null) {
-            miSesion.setAttribute("usuario", usuario);
-            response.sendRedirect("bajaUsuario.jsp?mens=Usuario encontrado!"); 
+        if (tramite != null) {
+            miSesion.setAttribute("tramite", tramite);
+            response.sendRedirect("bajaTramite.jsp?mens=Tramite encontrado!"); 
         } else {
-            response.sendRedirect("bajaUsuario.jsp?mens=Usuario no encontrado!");
+            response.sendRedirect("bajaTramite.jsp?mens=Tramite no encontrado!");
         }
     }
 
@@ -39,16 +40,16 @@ public class BajaUsuarioSv extends HttpServlet {
             String idString = request.getParameter("id");
             long id = Long.parseLong(idString);
         try {
-            control.eliminaUsuario(id);
+            control.eliminaTramite(id);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(BajaUsuarioSv.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-            response.sendRedirect("index.jsp?mens=Usuario eliminado con Exito!");
+            response.sendRedirect("index.jsp?mens=Tramite eliminado con Exito!");
     }
 
     @Override
     public String getServletInfo() {
-        return "Servlet para gestionar la eliminación de usuarios.";
+        return "Servlet para gestionar la eliminación de Tramites.";
     }
 }

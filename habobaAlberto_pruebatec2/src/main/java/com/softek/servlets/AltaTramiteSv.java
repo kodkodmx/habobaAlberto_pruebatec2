@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AltaUsuarioSv", urlPatterns = {"/AltaUsuarioSv"})
-public class AltaUsuarioSv extends HttpServlet {
+@WebServlet(name = "AltaTramiteSv", urlPatterns = {"/AltaTramiteSv"})
+public class AltaTramiteSv extends HttpServlet {
 
     ControladoraLogica control = new ControladoraLogica();
 
@@ -23,17 +23,10 @@ public class AltaUsuarioSv extends HttpServlet {
             throws ServletException, IOException {
 
         String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String password2 = request.getParameter("password2");
+        String descripcion = request.getParameter("descripcion");
+        control.crearTramite(nombre, descripcion);
 
-        if (password.equals(password2)) {
-            control.crearUsuario(nombre, apellido, email, password);
-        } else {
-            response.sendRedirect("altaUsuario.jsp?mens=La Contrasenia no Coincide. Intenta Nuevamente!");
-        }
-        response.sendRedirect("index.jsp?mens=Usuario Creado Exitosamente!");
+        response.sendRedirect("index.jsp?mens=Tramite Creado Exitosamente!");
     }
 
     @Override

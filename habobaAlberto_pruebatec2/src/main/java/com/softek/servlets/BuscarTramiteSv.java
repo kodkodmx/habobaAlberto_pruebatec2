@@ -1,6 +1,7 @@
 package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
+import com.softek.logica.Tramite;
 import com.softek.logica.Usuario;
 import java.io.IOException;
 import java.util.List;
@@ -11,23 +12,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "BuscarUsuarioSv", urlPatterns = {"/BuscarUsuarioSv"})
-public class BuscarUsuarioSv extends HttpServlet {
+@WebServlet(name = "BuscarTramiteSv", urlPatterns = {"/BuscarTramiteSv"})
+public class BuscarTramiteSv extends HttpServlet {
 
     private final ControladoraLogica control = new ControladoraLogica();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        Usuario usuario = control.buscaUsuario(email);
+        String nombre = request.getParameter("nombre");
+       Tramite tramite = control.buscaTramite(nombre);
         HttpSession miSesion = request.getSession();
-        if (usuario != null) {
-            miSesion.setAttribute("usuario", usuario);
-            response.sendRedirect("buscarUsuario.jsp?mens=Usuario encontrado!");
+        if (tramite != null) {
+            miSesion.setAttribute("tramite", tramite);
+            response.sendRedirect("buscarTramite.jsp?mens=Tramite encontrado!");
             miSesion.removeAttribute("ocultar");
         } else {
-            response.sendRedirect("buscarUsuario.jsp?mens=Usuario no encontrado!");
+            response.sendRedirect("buscarTramite.jsp?mens=Tramite no encontrado!");
             miSesion.removeAttribute("ocultar");
         }
     }
@@ -36,18 +37,18 @@ public class BuscarUsuarioSv extends HttpServlet {
 protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-        List<Usuario> usuarios = control.traerTodosLosUsuarios();
+        List<Tramite> tramites = control.traerTodosLosTramites();
 
         HttpSession miSesion = request.getSession();
-        miSesion.setAttribute("listaUsuarios", usuarios);
-        miSesion.setAttribute("mens", "Lista de todos los Usuarios");
+        miSesion.setAttribute("listaTramites", tramites);
+        miSesion.setAttribute("mens", "Lista de todos los Tramites");
         miSesion.setAttribute("ocultar", "ocultar");
-        response.sendRedirect("buscarUsuario.jsp?mens=Lista de todos los Usuarios");
+        response.sendRedirect("buscarTramite.jsp?mens=Lista de todos los Tramites");
     
 }
 
     @Override
     public String getServletInfo() {
-        return "Servlet para gestionar la eliminación de usuarios.";
+        return "Servlet para gestionar la eliminación de tramites.";
     }
 }

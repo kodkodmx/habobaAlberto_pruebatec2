@@ -24,14 +24,16 @@ public class Tramite implements Serializable {
     
     public Tramite() {
     }
-    
-    public Tramite(String nombre, String descripcion, List<Turno> turnos, boolean disponible) {
+
+    public Tramite(long id, String nombre, String descripcion, List<Turno> turnos, boolean disponible) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.turnos = new ArrayList<>();  
-        this.disponible = true;
+        this.turnos = turnos;
+        this.disponible = disponible;
     }
-
+    
+    
     public long getId() {
         return id;
     }

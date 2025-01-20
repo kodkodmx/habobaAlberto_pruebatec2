@@ -12,11 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 
 public class TramiteJpaController implements Serializable {
 
     public TramiteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+    
+    public TramiteJpaController() {
+        emf = Persistence.createEntityManagerFactory("pruebatec2PU");
     }
     private EntityManagerFactory emf = null;
 
@@ -177,5 +183,32 @@ public class TramiteJpaController implements Serializable {
             em.close();
         }
     }
+
+    Tramite findTramiteByName(String nombre) {
+        EntityManager em =getEntityManager();
+        
+        try {
+            String consulta = "SELECT tramite FROM Tramite tramite WHERE tramite.nombre = :nombre";
+            Query query = em.createQuery(consulta);
+            query.setParameter("nombre",nombre);
+            return (Tramite) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        finally {
+            em.close();
+        }
+    }
+
+    List<Tramite> findAllTramites() {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createQuery("SELECT tramite FROM Tramite tramite", Tramite.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
     
 }

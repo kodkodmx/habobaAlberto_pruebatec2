@@ -1,3 +1,4 @@
+<%@page import="com.softek.logica.Tramite"%>
 <%@page import="com.softek.logica.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/<%= session.getAttribute("css") != null ? session.getAttribute("css") : "styles.css"%>">
-        <title>Baja Usuarios</title>
+        <title>Baja Tramites</title>
     </head>
     <body>
         <%
@@ -21,7 +22,7 @@
             <%if (mensaje != null) {%>
             <h2 id="alerta"><%=mensaje%></h2>
             <%} else {%>
-            <h2>Por Favor Ingresa el Email del Usuario:</h2>
+            <h2>Por Favor Ingresa el nombre del Tramite:</h2>
             <%}%>
             <div class="button-container" id="retardo7">
                 <form action="MenuSv" method="POST" id="logoutForm">
@@ -32,26 +33,25 @@
                 </form>
             </div>
             <br>
-            <% Usuario user = (Usuario) miSesion.getAttribute("usuario");
-                if (user == null) {
+            <% Tramite tramite = (Tramite) miSesion.getAttribute("tramite");
+                if (tramite == null) {
             %>
-            <form action="BajaUsuarioSv" method="POST" autocomplete="off" id="retardo7">
+            <form action="BajaTramiteSv" method="POST" autocomplete="off" id="retardo7">
                 <fieldset>
-                    <legend>Correo del Usuario a Eliminar:</legend>
-                    <label for="email">Correo electronico:</label><br>
-                    <input type="email" id="email" name="email" placeholder="usuario@dominio.com" required><br><br>
-                    <input type="submit" value="Usuario a eliminar">
+                    <legend>Nombre del Tramite a Eliminar:</legend>
+                    <label for="nombre">Nombre:</label><br>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre del tramite" required><br><br>
+                    <input type="submit" value="Tramite a eliminar">
                 </fieldset>
             </form>
             <%} else {%>
-            <form action="BajaUsuarioSv" method="GET" autocomplete="off" id="retardo7">
+            <form action="BajaTramiteSv" method="GET" autocomplete="off" id="retardo7">
                 <fieldset>
-                    <legend>Confirmar Usuario a Eliminar:</legend>
-                    <p><strong>Nombre:</strong> <%= user.getNombre()%></p>
-                    <p><strong>Apellido:</strong> <%= user.getApellido()%></p>
-                    <p><strong>Email:</strong> <%= user.getEmail()%></p>
-                    <input type="hidden" name="id" value="<%= user.getId()%>">                
-                    <input type="submit" class="botonrojo" value="Eliminar Usuario">
+                    <legend>Confirmar Tramite a Eliminar:</legend>
+                    <p><strong>Nombre:</strong> <%= tramite.getNombre()%></p>
+                    <p><strong>Descripcion:</strong> <%= tramite.getDescripcion()%></p>
+                    <input type="hidden" name="id" value="<%= tramite.getId()%>">                
+                    <input type="submit" class="botonrojo" value="Eliminar Tramite">
                 </fieldset>
             </form>
             <%}%>

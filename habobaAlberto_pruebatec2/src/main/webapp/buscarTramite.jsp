@@ -1,3 +1,4 @@
+<%@page import="com.softek.logica.Tramite"%>
 <%@page import="java.util.List"%>
 <%@page import="com.softek.logica.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -6,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/<%= session.getAttribute("css") != null ? session.getAttribute("css") : "styles.css"%>">
-        <title>Buscar Usuarios</title>
+        <title>Buscar Tramites</title>
     </head>
     <body>
         <%
@@ -22,7 +23,7 @@
             <% if (mensaje != null) { %>
             <h2 id="alerta"><%= mensaje %></h2>
             <% } else { %>
-            <h2>Por Favor Ingresa el email del Usuario:</h2>
+            <h2>Por Favor Ingresa el nombre del Tramite:</h2>
             <% } %>
         </div>
         <div class="button-container" id="retardo7">
@@ -38,49 +39,46 @@
         <%
             String ocultar = (String) miSesion.getAttribute("ocultar");
             if (ocultar == null) {
-                Usuario user = (Usuario) miSesion.getAttribute("usuario");
-                if (user != null) { %>
+                Tramite tramite = (Tramite) miSesion.getAttribute("tramite");
+                if (tramite != null) { %>
         <div id="retardo7">
             <fieldset>
-                <legend>Datos de <%= user.getEmail() %></legend>
-                <p><strong>Nombre:</strong> <%= user.getNombre() %></p>
-                <p><strong>Apellido:</strong> <%= user.getApellido() %></p>
-                <p><strong>Email:</strong> <%= user.getEmail() %></p>
+                <legend>Datos de <%= tramite.getNombre() %></legend>
+                <p><strong>Nombre:</strong> <%= tramite.getNombre() %></p>
+                <p><strong>Descripcion:</strong> <%= tramite.getDescripcion() %></p>
             </fieldset>
         </div>
         <% } else { %>
-        <form action="BuscarUsuarioSv" method="POST" autocomplete="off" id="retardo7">
+        <form action="BuscarTramiteSv" method="POST" autocomplete="off" id="retardo7">
             <fieldset>
-                <legend>Correo del Usuario a Buscar:</legend>
-                <label for="email">Correo electrónico:</label><br>
-                <input type="email" id="email" name="email" placeholder="usuario@dominio.com" required><br><br>
-                <input type="submit" value="Buscar Usuario">
+                <legend>Nombre del Tramite a Buscar:</legend>
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre de Tramite" required><br><br>
+                <input type="submit" value="Buscar Tramite">
             </fieldset>
         </form>
         <% } %>
         <% } %>
 
-        <form action="BuscarUsuarioSv" method="GET" autocomplete="off" id="retardo7">
+        <form action="BuscarTramiteSv" method="GET" autocomplete="off" id="retardo7">
             <fieldset>
-                <legend>Mostrar todos los Usuarios</legend>
+                <legend>Mostrar todos los Tramites</legend>
                 <%
-                    List<Usuario> listaUsuarios = (List<Usuario>) miSesion.getAttribute("listaUsuarios");
-                    if (listaUsuarios != null && !listaUsuarios.isEmpty()) {
+                    List<Tramite> listaTramites = (List<Tramite>) miSesion.getAttribute("listaTramites");
+                    if (listaTramites != null && !listaTramites.isEmpty()) {
                 %>
                 <table>
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
+                            <th>Descripcion</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (Usuario usuario : listaUsuarios) { %>
+                        <% for (Tramite tramite : listaTramites) { %>
                         <tr>
-                            <td><%= usuario.getNombre() %></td>
-                            <td><%= usuario.getApellido() %></td>
-                            <td><%= usuario.getEmail() %></td>
+                            <td><%= tramite.getNombre() %></td>
+                            <td><%= tramite.getDescripcion() %></td>
                         </tr>
                         <% } %>
                     </tbody>

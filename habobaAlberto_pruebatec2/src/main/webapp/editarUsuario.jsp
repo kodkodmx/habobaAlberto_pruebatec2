@@ -1,10 +1,11 @@
+<%@page import="com.softek.logica.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/<%= session.getAttribute("css") != null ? session.getAttribute("css") : "styles.css"%>">
-        <title>Alta Usuarios</title>
+        <title>Editar Usuarios</title>
     </head>
     <body>
         <%
@@ -20,9 +21,9 @@
             <%if (mensaje != null) {%>
             <h2 id="alerta"><%=mensaje%></h2>
             <%} else {%>
-            <h2>Por Favor Ingresa los datos del Usuario:</h2>
+            <h2>Modificar Usuario:</h2>
+            <%}%>
         </div>
-        <% } %>
         <div class="button-container" id="retardo7">
             <form action="MenuSv" method="POST" id="logoutForm">
                 <button type="submit" name="action" value="logout" class="button">Cerrar sesión</button>
@@ -32,34 +33,45 @@
             </form>
         </div>
         <br>
-        <form action="AltaUsuarioSv" method="POST" autocomplete="off" id="retardo7">
+        <% Usuario user = (Usuario) miSesion.getAttribute("usuario");
+            if (user == null) {
+        %>
+        <form action="EditarUsuarioSv" method="GET" autocomplete="off" id="retardo7">
             <fieldset>
-                <legend>Capturar Nuevo Usuario</legend>
-
-                <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br><br>
-
-                <label for="apellido">Apellido:</label><br>
-                <input type="text" id="apellido" name="apellido" placeholder="Apellido" required ><br><br>
-
-
+                <legend>Correo del Usuario a Editar:</legend>
                 <label for="email">Correo electronico:</label><br>
                 <input type="email" id="email" name="email" placeholder="usuario@dominio.com" required><br><br>
-
-                <label for="password">Contraseña:</label><br>
-                <input type="password" id="password" name="password" placeholder="Mínimo 4 caracteres" minlength="4" required autocomplete="off"><br><br>
-
-                <label for="password2">Repetir contraseña:</label><br>
-                <input type="password" id="password2" name="password2" placeholder="Repite tu contraseña" minlength="4" required autocomplete="off"><br><br>
-
-
-                <input type="submit" value="Agregar Usuario">
+                <input type="submit" value="Usuario a editar">
             </fieldset>
         </form>
+        <%} else {%>
+        <form action="EditarUsuarioSv" method="POST" autocomplete="off" id="retardo7">
+            <fieldset>
+                <legend>Modificar Usuario:</legend>
+
+                <label for="nombre"><strong>Nombre:</strong></label>
+                <input type="text" id="nombre" name="nombre" value="<%= user.getNombre()%>" required><br><br>
+
+                <label for="apellido"><strong>Apellido:</strong></label>
+                <input type="text" id="apellido" name="apellido" value="<%= user.getApellido()%>" required><br><br>
+
+                <label for="email"><strong>Email:</strong></label>
+                <input type="email" id="email" name="email" value="<%= user.getEmail()%>" required><br><br>
+
+                <label for="password"><strong>Contraseña:</strong></label>
+                <input type="password" id="password" name="password" value="<%= user.getPassword()%>" required><br><br>
+
+                <label for="password2"><strong>Repetir Contraseña:</strong></label>
+                <input type="password" id="password2" name="password2" value="Repetir la Contraseña" required><br><br>
+
+                <input type="hidden" name="id" value="<%= user.getId()%>">
+                <input type="submit" value="Editar Usuario">
+            </fieldset>
+        </form>
+        <%}%>
         <%} else {
                 response.sendRedirect("login.jsp?mens=Primero Inicia Sesion!");
-            }
-        %>
+            }%>
         <br>
         <footer>
             <blockquote>

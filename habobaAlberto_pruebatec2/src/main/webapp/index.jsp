@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/<%= session.getAttribute("css") != null ? session.getAttribute("css") : "styles.css"%>">
-        <title>Login</title>
+        <title>Menu</title>
     </head>
     <body>
         <%
@@ -12,29 +12,24 @@
             String login;
             if (miSesion.getAttribute("email") != null) {
                 login = (String) miSesion.getAttribute("email");
-            String mensaje = request.getParameter("mens");  %>
-            <div class="typewriter">
-                <h1>Bienvenido <%=login%></h1>
-                <br>
-                <%if (mensaje != null) { %>
-                <h2 id="alerta"><%=mensaje%></h2>
-                <%} else {%>
-                <h2>Por Favor Selecciona una opcion:</h2>
-            </div>
-
-        <%}
-
-            String action = request.getParameter("action");
-            if ("logout".equals(action)) {
-                if (miSesion != null) {
-                    miSesion.removeAttribute("email");
-                    response.sendRedirect(request.getRequestURI());
-                }
-            }
-        %>
-        <form action="" method="POST" id="retardo7">
-            <button type="submit" name="action" value="logout">Sign Out</button>
-        </form>
+                String mensaje = request.getParameter("mens");%>
+        <div class="typewriter">
+            <h1>Bienvenido <%=login%></h1>
+            <br>
+            <%if (mensaje != null) {%>
+            <h2 id="alerta"><%=mensaje%></h2>
+            <%} else {%>
+            <h2>Por Favor Selecciona una opcion:</h2>
+        </div>
+        <% } %>        
+        <div class="button-container" id="retardo7">
+            <form action="MenuSv" method="POST" id="logoutForm">
+                <button type="submit" name="action" value="logout" class="button">Cerrar sesión</button>
+            </form>
+            <form action="MenuSv" method="POST" id="menuForm">
+                <button type="submit" name="menuAction" value="menu" class="button">Menú Principal</button>
+            </form>
+        </div>
         <br>
         <form action="GestorTurnosSv" method="POST" id="retardo7">
             <fieldset>
@@ -48,7 +43,7 @@
         <br>
         <form action="GestorCiudadanosSv" method="POST" id="retardo7">
             <fieldset>
-                <legend>Ciudadano</legend>
+                <legend>Ciudadanos</legend>
                 <button type="submit" name="action" value="alta">Alta Ciudadano</button>
                 <button type="submit" name="action" value="buscar">Buscar Ciudadano</button>
                 <button type="submit" name="action" value="editar">Editar Ciudadano</button>

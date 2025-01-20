@@ -32,7 +32,7 @@ public class GestorTramitesSv extends HttpServlet {
                 response.sendRedirect("buscarTramite.jsp");
                 break;
             case "borrar":
-                response.sendRedirect("borrarTramite.jsp");
+                response.sendRedirect("bajaTramite.jsp");
                 break;
             default:
                 response.sendRedirect("error.jsp");

@@ -23,7 +23,11 @@ public class ControladoraLogica {
     }
 
     public void crearUsuario(String nombre, String apellido, String email, String password) {
-        Usuario usuario = new Usuario(nombre, apellido, email, password);
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setEmail(email);
+        usuario.setPassword(password);
         controlPersis.crearUsuario(usuario);
 
     }
@@ -43,6 +47,33 @@ public class ControladoraLogica {
 
     public List<Usuario> traerTodosLosUsuarios() {
         return controlPersis.traerUsuarios();
+    }
+
+    public void modificarUsuario(Usuario usuario) {
+        controlPersis.modificarUsuario(usuario);
+
+    }
+
+    public void crearTramite(String nombre, String descripcion) {
+        Tramite tramite = new Tramite();
+        tramite.setNombre(nombre);
+        tramite.setDescripcion(descripcion);
+        controlPersis.crearTramite(tramite);
+    }
+
+    public void eliminaTramite(long id) throws NonexistentEntityException {
+        controlPersis.eliminarTramite(id);
+    }
+
+    public Tramite buscaTramite(String nombre) {
+        Tramite tramite = controlPersis.buscarTramite(nombre);
+
+        return tramite;
+    }
+
+    public List<Tramite> traerTodosLosTramites() {
+        
+        return controlPersis.traerTramites();        
     }
 
 }
