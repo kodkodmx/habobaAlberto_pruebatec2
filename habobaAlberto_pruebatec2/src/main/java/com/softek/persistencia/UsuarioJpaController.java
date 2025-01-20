@@ -15,14 +15,15 @@ import javax.persistence.criteria.Root;
 
 public class UsuarioJpaController implements Serializable {
 
+    private EntityManagerFactory emf = null;
+
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+
     public UsuarioJpaController() {
         emf = Persistence.createEntityManagerFactory("pruebatec2PU");
     }
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -97,7 +98,7 @@ public class UsuarioJpaController implements Serializable {
     private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Usuario> cq = em.getCriteriaBuilder().createQuery(Usuario.class);
             cq.select(cq.from(Usuario.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -122,7 +123,7 @@ public class UsuarioJpaController implements Serializable {
     public int getUsuarioCount() {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Long> cq = em.getCriteriaBuilder().createQuery(Long.class);
             Root<Usuario> rt = cq.from(Usuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
@@ -131,24 +132,21 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
-    Usuario findUserByEmail(String email) {
-             
-        EntityManager em =getEntityManager();
-        
+
+    public Usuario findUserByEmail(String email) {
+        EntityManager em = getEntityManager();
         try {
-            String consulta = "SELECT usu FROM Usuario usu WHERE usu.email = :email";
+            String consulta = "SELECT u FROM Usuario u WHERE u.email = :email";
             Query query = em.createQuery(consulta);
-            query.setParameter("email",email);
+            query.setParameter("email", email);
             return (Usuario) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-    
+
     public List<Usuario> findAllUsuarios() {
         EntityManager em = getEntityManager();
         try {
@@ -158,5 +156,4 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
 }

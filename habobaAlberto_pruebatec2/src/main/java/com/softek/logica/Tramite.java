@@ -12,16 +12,18 @@ public class Tramite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false, length = 500)
     private String descripcion;
 
-    @OneToMany(mappedBy = "elTramite")
-    private List<Turno> turnos;
+    @OneToMany(mappedBy = "elTramite", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Turno> turnos = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean disponible;
 
-    
     public Tramite() {
     }
 
@@ -29,11 +31,10 @@ public class Tramite implements Serializable {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.turnos = turnos;
+        this.turnos = turnos != null ? turnos : new ArrayList<>();
         this.disponible = disponible;
     }
-    
-    
+
     public long getId() {
         return id;
     }
@@ -63,7 +64,7 @@ public class Tramite implements Serializable {
     }
 
     public void setTurnos(List<Turno> turnos) {
-        this.turnos = turnos;
+        this.turnos = turnos != null ? turnos : new ArrayList<>();
     }
 
     public boolean isDisponible() {
@@ -74,8 +75,16 @@ public class Tramite implements Serializable {
         this.disponible = disponible;
     }
 
-    
-    
-
-    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tramite{");
+        sb.append("id=").append(id);
+        sb.append(", nombre='").append(nombre).append('\'');
+        sb.append(", descripcion='").append(descripcion).append('\'');
+        sb.append(", turnos=").append(turnos);
+        sb.append(", disponible=").append(disponible);
+        sb.append('}');
+        return sb.toString();
+    }
 }

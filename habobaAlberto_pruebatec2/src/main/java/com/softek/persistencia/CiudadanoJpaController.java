@@ -1,53 +1,40 @@
 package com.softek.persistencia;
 
 import com.softek.logica.Ciudadano;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import com.softek.logica.Turno;
 import com.softek.persistencia.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class CiudadanoJpaController implements Serializable {
+
+    private EntityManagerFactory emf = null;
 
     public CiudadanoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+
+    public CiudadanoJpaController() {
+        emf = Persistence.createEntityManagerFactory("pruebatec2PU");
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
     public void create(Ciudadano ciudadano) {
-        if (ciudadano.getTurnos() == null) {
-            ciudadano.setTurnos(new ArrayList<Turno>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Turno> attachedTurnos = new ArrayList<Turno>();
-            for (Turno turnosTurnoToAttach : ciudadano.getTurnos()) {
-                turnosTurnoToAttach = em.getReference(turnosTurnoToAttach.getClass(), turnosTurnoToAttach.getId());
-                attachedTurnos.add(turnosTurnoToAttach);
-            }
-            ciudadano.setTurnos(attachedTurnos);
             em.persist(ciudadano);
-            for (Turno turnosTurno : ciudadano.getTurnos()) {
-                Ciudadano oldElCiudadanoOfTurnosTurno = turnosTurno.getElCiudadano();
-                turnosTurno.setElCiudadano(ciudadano);
-                turnosTurno = em.merge(turnosTurno);
-                if (oldElCiudadanoOfTurnosTurno != null) {
-                    oldElCiudadanoOfTurnosTurno.getTurnos().remove(turnosTurno);
-                    oldElCiudadanoOfTurnosTurno = em.merge(oldElCiudadanoOfTurnosTurno);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,34 +48,7 @@ public class CiudadanoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Ciudadano persistentCiudadano = em.find(Ciudadano.class, ciudadano.getId());
-            List<Turno> turnosOld = persistentCiudadano.getTurnos();
-            List<Turno> turnosNew = ciudadano.getTurnos();
-            List<Turno> attachedTurnosNew = new ArrayList<Turno>();
-            for (Turno turnosNewTurnoToAttach : turnosNew) {
-                turnosNewTurnoToAttach = em.getReference(turnosNewTurnoToAttach.getClass(), turnosNewTurnoToAttach.getId());
-                attachedTurnosNew.add(turnosNewTurnoToAttach);
-            }
-            turnosNew = attachedTurnosNew;
-            ciudadano.setTurnos(turnosNew);
             ciudadano = em.merge(ciudadano);
-            for (Turno turnosOldTurno : turnosOld) {
-                if (!turnosNew.contains(turnosOldTurno)) {
-                    turnosOldTurno.setElCiudadano(null);
-                    turnosOldTurno = em.merge(turnosOldTurno);
-                }
-            }
-            for (Turno turnosNewTurno : turnosNew) {
-                if (!turnosOld.contains(turnosNewTurno)) {
-                    Ciudadano oldElCiudadanoOfTurnosNewTurno = turnosNewTurno.getElCiudadano();
-                    turnosNewTurno.setElCiudadano(ciudadano);
-                    turnosNewTurno = em.merge(turnosNewTurno);
-                    if (oldElCiudadanoOfTurnosNewTurno != null && !oldElCiudadanoOfTurnosNewTurno.equals(ciudadano)) {
-                        oldElCiudadanoOfTurnosNewTurno.getTurnos().remove(turnosNewTurno);
-                        oldElCiudadanoOfTurnosNewTurno = em.merge(oldElCiudadanoOfTurnosNewTurno);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -118,17 +78,45 @@ public class CiudadanoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The ciudadano with id " + id + " no longer exists.", enfe);
             }
-            List<Turno> turnos = ciudadano.getTurnos();
-            for (Turno turnosTurno : turnos) {
-                turnosTurno.setElCiudadano(null);
-                turnosTurno = em.merge(turnosTurno);
-            }
             em.remove(ciudadano);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
             }
+        }
+    }
+
+    public Ciudadano findCiudadano(long id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Ciudadano.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    public Ciudadano findCiudadanoByClaveIdentificacion(String claveIdentificacion) {
+        EntityManager em = getEntityManager();
+        try {
+            String consulta = "SELECT c FROM Ciudadano c WHERE c.claveIdentificacion = :claveIdentificacion";
+            Query query = em.createQuery(consulta);
+            query.setParameter("claveIdentificacion", claveIdentificacion);
+            return (Ciudadano) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Ciudadano> findAllCiudadanos() {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createQuery("SELECT c FROM Ciudadano c", Ciudadano.class);
+            return query.getResultList();
+        } finally {
+            em.close();
         }
     }
 
@@ -143,7 +131,7 @@ public class CiudadanoJpaController implements Serializable {
     private List<Ciudadano> findCiudadanoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Ciudadano> cq = em.getCriteriaBuilder().createQuery(Ciudadano.class);
             cq.select(cq.from(Ciudadano.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -156,19 +144,10 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
-    public Ciudadano findCiudadano(long id) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(Ciudadano.class, id);
-        } finally {
-            em.close();
-        }
-    }
-
     public int getCiudadanoCount() {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Long> cq = em.getCriteriaBuilder().createQuery(Long.class);
             Root<Ciudadano> rt = cq.from(Ciudadano.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
@@ -177,5 +156,4 @@ public class CiudadanoJpaController implements Serializable {
             em.close();
         }
     }
-    
 }

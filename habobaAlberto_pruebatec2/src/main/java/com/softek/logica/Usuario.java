@@ -1,7 +1,6 @@
 package com.softek.logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +15,17 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "elUsuario")
@@ -26,8 +33,6 @@ public class Usuario implements Serializable {
 
     @Column(nullable = false)
     private boolean disponible;
-    
-    
 
     public Usuario() {
     }
@@ -39,8 +44,6 @@ public class Usuario implements Serializable {
         this.email = email;
         this.password = password;
     }
-
-
 
     public long getId() {
         return id;
@@ -97,8 +100,4 @@ public class Usuario implements Serializable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-
-    
-    
-
 }

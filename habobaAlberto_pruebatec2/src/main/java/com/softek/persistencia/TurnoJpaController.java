@@ -1,25 +1,27 @@
 package com.softek.persistencia;
 
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import com.softek.logica.Usuario;
 import com.softek.logica.Tramite;
 import com.softek.logica.Ciudadano;
 import com.softek.logica.Turno;
 import com.softek.persistencia.exceptions.NonexistentEntityException;
+
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class TurnoJpaController implements Serializable {
+
+    private EntityManagerFactory emf = null;
 
     public TurnoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -179,7 +181,7 @@ public class TurnoJpaController implements Serializable {
     private List<Turno> findTurnoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Turno> cq = em.getCriteriaBuilder().createQuery(Turno.class);
             cq.select(cq.from(Turno.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -204,7 +206,7 @@ public class TurnoJpaController implements Serializable {
     public int getTurnoCount() {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Long> cq = em.getCriteriaBuilder().createQuery(Long.class);
             Root<Turno> rt = cq.from(Turno.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
@@ -213,5 +215,4 @@ public class TurnoJpaController implements Serializable {
             em.close();
         }
     }
-    
 }

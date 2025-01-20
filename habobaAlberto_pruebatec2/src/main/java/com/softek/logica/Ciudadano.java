@@ -12,12 +12,17 @@ public class Ciudadano implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false, unique = true)
     private String claveIdentificacion;
 
-    @OneToMany(mappedBy = "elCiudadano")
-    private List<Turno> turnos;
+    @OneToMany(mappedBy = "elCiudadano", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Turno> turnos = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean disponible;
@@ -29,8 +34,8 @@ public class Ciudadano implements Serializable {
         this.nombre = nombre;
         this.apellido = apellido;
         this.claveIdentificacion = claveIdentificacion;
-        this.turnos = new ArrayList<>();  
-        this.disponible = true;
+        this.turnos = turnos != null ? turnos : new ArrayList<>();
+        this.disponible = disponible;
     }
 
     public long getId() {
@@ -80,7 +85,4 @@ public class Ciudadano implements Serializable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-    
-    
-
 }

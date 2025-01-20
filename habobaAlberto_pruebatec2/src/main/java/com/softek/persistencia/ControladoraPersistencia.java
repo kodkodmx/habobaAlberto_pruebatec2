@@ -1,5 +1,6 @@
 package com.softek.persistencia;
 
+import com.softek.logica.Ciudadano;
 import com.softek.logica.Tramite;
 import com.softek.logica.Usuario;
 import com.softek.persistencia.exceptions.NonexistentEntityException;
@@ -11,6 +12,7 @@ public class ControladoraPersistencia {
 
     UsuarioJpaController usuarioJpa = new UsuarioJpaController();
     TramiteJpaController tramiteJpa = new TramiteJpaController();
+    CiudadanoJpaController ciudadanoJpa = new CiudadanoJpaController();
 
     public Usuario buscarUsuario(String email) {
         return usuarioJpa.findUserByEmail(email);
@@ -29,7 +31,7 @@ public class ControladoraPersistencia {
     }
 
     public void modificarUsuario(Usuario usuario) {
-    try {
+        try {
             usuarioJpa.edit(usuario);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,4 +54,36 @@ public class ControladoraPersistencia {
         return tramiteJpa.findAllTramites();
     }
 
+    public void modificarTramite(Tramite tramite) {
+        System.out.println("desde control persi:" + tramite);
+        try {
+            tramiteJpa.edit(tramite);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void crearCiudadano(Ciudadano ciudadano) {
+        ciudadanoJpa.create(ciudadano);
+    }
+
+    public Ciudadano buscarCiudadano(String claveIdentificacion) {
+        return ciudadanoJpa.findCiudadanoByClaveIdentificacion(claveIdentificacion);
+    }
+
+    public List<Ciudadano> traerCiudadanos() {
+        return ciudadanoJpa.findAllCiudadanos();
+    }
+
+    public void modificarCiudadano(Ciudadano ciudadano) {
+        try {
+            ciudadanoJpa.edit(ciudadano);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void eliminarCiudadano(long id) throws NonexistentEntityException {
+        ciudadanoJpa.destroy(id);
+    }
 }

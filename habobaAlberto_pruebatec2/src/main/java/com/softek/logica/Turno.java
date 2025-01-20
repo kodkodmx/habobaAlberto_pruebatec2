@@ -14,25 +14,40 @@ public class Turno implements Serializable {
     @Column(nullable = false)
     private LocalDate fecha;
 
+    @Column(nullable = false)
     private String descripcion;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario elUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "tramite_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "tramite_id", nullable = false)
     private Tramite elTramite;
 
-    @ManyToOne
-    @JoinColumn(name = "ciudadano_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ciudadano_id", nullable = false)
     private Ciudadano elCiudadano;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EstadoTurno estado;
 
     @Column(nullable = false)
     private boolean disponible;
+
+    public Turno() {
+    }
+
+    public Turno(LocalDate fecha, String descripcion, Usuario elUsuario, Tramite elTramite, Ciudadano elCiudadano, EstadoTurno estado) {
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+        this.elUsuario = elUsuario;
+        this.elTramite = elTramite;
+        this.elCiudadano = elCiudadano;
+        this.estado = estado;
+        this.disponible = true;
+    }
 
     public long getId() {
         return id;
@@ -102,19 +117,4 @@ public class Turno implements Serializable {
         EN_ESPERA,
         YA_ATENDIDO
     }
-
-    public Turno() {
-    }
-
-    public Turno(LocalDate fecha, String descripcion, Usuario elUsuario, Tramite elTramite, Ciudadano elCiudadano, EstadoTurno estado) {
-        this.fecha = fecha;
-        this.descripcion = descripcion;
-        this.elUsuario = elUsuario;
-        this.elTramite = elTramite;
-        this.elCiudadano = elCiudadano;
-        this.estado = estado;
-        this.disponible = true;
-    }
-
-    
 }
