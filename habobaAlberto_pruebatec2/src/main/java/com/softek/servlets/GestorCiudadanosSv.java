@@ -32,7 +32,7 @@ public class GestorCiudadanosSv extends HttpServlet {
                 response.sendRedirect("buscarCiudadano.jsp");
                 break;
             case "borrar":
-                response.sendRedirect("borrarCiudadano.jsp");
+                response.sendRedirect("bajaCiudadano.jsp");
                 break;
             default:
                 response.sendRedirect("error.jsp");

@@ -144,12 +144,21 @@ fieldset:hover {
     margin-bottom: 10px;
 }
 
+/* Asegura que los botones se ubiquen en la misma línea y ocupen todo el espacio */
+fieldset {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    justify-content: space-between; /* Distribuye los botones equitativamente */
+    flex-wrap: wrap; /* Asegura que si no caben todos, se acomoden a la siguiente línea */
+}
+
 input[type="submit"],
 button[type="submit"] {
+    flex: 1; /* Asegura que todos los botones ocupen el mismo tamaño */
     background-color: #00ff00;
     color: black;
     border: 2px solid #00cc00;
-    padding: 10px 20px;
+    padding: 15px 20px; /* Aumenta el tamaño del botón */
     font-family: "Inconsolata", monospace;
     font-size: 1rem;
     cursor: pointer;

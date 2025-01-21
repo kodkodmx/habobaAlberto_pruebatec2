@@ -32,7 +32,9 @@ public class MenuSv extends HttpServlet {
                 miSesion.removeAttribute("ocultar");
                 miSesion.removeAttribute("listaUsuarios");
                 miSesion.removeAttribute("listaTramites");
+                miSesion.removeAttribute("listaCiudadanos");
                 miSesion.removeAttribute("tramite");
+                miSesion.removeAttribute("ciudadano");
                 miSesion.removeAttribute("listaUsuarios");
             }
             response.sendRedirect("index.jsp");

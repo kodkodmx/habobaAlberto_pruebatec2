@@ -81,4 +81,12 @@ public class ControladoraLogica {
     public List<Ciudadano> traerTodosLosCiudadanos() {
         return controlPersis.traerCiudadanos();
     }
+
+    public void eliminarCiudadano(long id) throws NonexistentEntityException {
+        controlPersis.eliminarCiudadano(id);
+    }
+
+    public void modificarCiudadano(Ciudadano ciudadano) {
+        controlPersis.modificarCiudadano(ciudadano);
+    }
 }
