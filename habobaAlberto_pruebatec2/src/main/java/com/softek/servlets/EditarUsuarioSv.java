@@ -2,10 +2,7 @@ package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
 import com.softek.logica.Usuario;
-import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

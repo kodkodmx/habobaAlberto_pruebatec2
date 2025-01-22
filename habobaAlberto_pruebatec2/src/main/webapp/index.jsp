@@ -30,46 +30,48 @@
                 <button type="submit" name="menuAction" value="menu" class="button">Menú Principal</button>
             </form>
         </div>
-        <br>
-        <form action="GestorTurnosSv" method="POST" id="retardo7">
-            <fieldset>
-                <legend>Turnos</legend>
-                <button type="submit" name="action" value="alta">Alta Turno</button>
-                <button type="submit" name="action" value="buscar">Buscar Turno</button>
-                <button type="submit" name="action" value="editar">Editar Turno</button>
-                <button type="submit" name="action" value="borrar">Borrar Turno</button>
-            </fieldset>
-        </form>
-        <br>
-        <form action="GestorCiudadanosSv" method="POST" id="retardo7">
-            <fieldset>
-                <legend>Ciudadanos</legend>
-                <button type="submit" name="action" value="alta">Alta Ciudadano</button>
-                <button type="submit" name="action" value="buscar">Buscar Ciudadano</button>
-                <button type="submit" name="action" value="editar">Editar Ciudadano</button>
-                <button type="submit" name="action" value="borrar">Borrar Ciudadano</button>
-            </fieldset>
-        </form>
-        <br>
-        <form action="GestorTramitesSv" method="POST" id="retardo7">
-            <fieldset>
-                <legend>Tramites</legend>
-                <button type="submit" name="action" value="alta">Alta Tramite</button>
-                <button type="submit" name="action" value="buscar">Buscar Tramite</button>
-                <button type="submit" name="action" value="editar">Editar Tramite</button>
-                <button type="submit" name="action" value="borrar">Borrar Tramite</button>
-            </fieldset>
-        </form>
-        <br>
-        <form action="GestorUsuariosSv" method="POST" id="retardo7">
-            <fieldset>
-                <legend>Usuarios</legend>
-                <button type="submit" name="action" value="alta">Alta Usuario</button>
-                <button type="submit" name="action" value="buscar">Buscar Usuario</button>
-                <button type="submit" name="action" value="editar">Editar Usuario</button>
-                <button type="submit" name="action" value="baja">Borrar Usuario</button>
-            </fieldset>
-        </form>
+        <br><br>
+        <div id="menu">
+            <form action="GestorTurnosSv" method="POST" id="retardo7">
+                <fieldset>
+                    <legend>Turnos</legend>
+                    <button type="submit" name="action" value="alta" class="botonrojo">Agrega Turno</button>
+                    <button type="submit" name="action" value="listarTodos">Gestion de Turnos</button>
+                    <button type="submit" name="action" value="listarEspera">Turnos Esperando</button>
+                    <button type="submit" name="action" value="listarAtendidos">Turnos Atendidos</button>
+                </fieldset>
+            </form>
+            <br>
+            <form action="GestorCiudadanosSv" method="POST" id="retardo7">
+                <fieldset>
+                    <legend>Ciudadanos</legend>
+                    <button type="submit" name="action" value="alta">Agrega Ciudadano</button>
+                    <button type="submit" name="action" value="buscar">Buscar Ciudadano</button>
+                    <button type="submit" name="action" value="editar">Editar Ciudadano</button>
+                    <button type="submit" name="action" value="borrar">Borrar Ciudadano</button>
+                </fieldset>
+            </form>
+            <br>
+            <form action="GestorTramitesSv" method="POST" id="retardo7">
+                <fieldset>
+                    <legend>Tramites</legend>
+                    <button type="submit" name="action" value="alta">Agrega Tramite</button>
+                    <button type="submit" name="action" value="buscar">Buscar Tramite</button>
+                    <button type="submit" name="action" value="editar">Editar Tramite</button>
+                    <button type="submit" name="action" value="borrar">Borrar Tramite</button>
+                </fieldset>
+            </form>
+            <br>
+            <form action="GestorUsuariosSv" method="POST" id="retardo7">
+                <fieldset>
+                    <legend>Usuarios</legend>
+                    <button type="submit" name="action" value="alta">Agrega Usuario</button>
+                    <button type="submit" name="action" value="buscar">Buscar Usuario</button>
+                    <button type="submit" name="action" value="editar">Editar Usuario</button>
+                    <button type="submit" name="action" value="baja">Borrar Usuario</button>
+                </fieldset>
+            </form>
+        </div>
         <% } else {
                 response.sendRedirect("login.jsp?mens=Primero Inicia Sesion!");
             }

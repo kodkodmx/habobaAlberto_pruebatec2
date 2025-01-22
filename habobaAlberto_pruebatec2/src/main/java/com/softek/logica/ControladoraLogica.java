@@ -1,33 +1,25 @@
 package com.softek.logica;
 
+import com.softek.logica.Turno.EstadoTurno;
 import com.softek.persistencia.ControladoraPersistencia;
 import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladoraLogica {
 
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
     public boolean validarAcceso(String email, String password) {
-
         Usuario usu = controlPersis.buscarUsuario(email);
-
-        if (usu != null) {
-            if (usu.getEmail().equals(email)) {
-                if (usu.getPassword().equals(password)) {
-                    return true;
-                }
-            }
+        if (usu != null && usu.getEmail().equals(email) && usu.getPassword().equals(password)) {
+            return true;
         }
         return false;
     }
 
-    public void crearUsuario(String nombre, String apellido, String email, String password) {
-        Usuario usuario = new Usuario();
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setEmail(email);
-        usuario.setPassword(password);
+    public void crearUsuario(Usuario usuario) {
         controlPersis.crearUsuario(usuario);
     }
 
@@ -44,13 +36,14 @@ public class ControladoraLogica {
     }
 
     public void modificarUsuario(Usuario usuario) {
-        controlPersis.modificarUsuario(usuario);
+        try {
+            controlPersis.modificarUsuario(usuario);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void crearTramite(String nombre, String descripcion) {
-        Tramite tramite = new Tramite();
-        tramite.setNombre(nombre);
-        tramite.setDescripcion(descripcion);
+    public void crearTramite(Tramite tramite) {
         controlPersis.crearTramite(tramite);
     }
 
@@ -60,6 +53,10 @@ public class ControladoraLogica {
 
     public Tramite buscaTramite(String nombre) {
         return controlPersis.buscarTramite(nombre);
+    }
+
+    public Tramite buscarTramitePorId(long id) {
+        return controlPersis.buscarTramitePorId(id);
     }
 
     public List<Tramite> traerTodosLosTramites() {
@@ -78,6 +75,10 @@ public class ControladoraLogica {
         return controlPersis.buscarCiudadano(claveIdentificacion);
     }
 
+    public Ciudadano buscarCiudadanoPorId(long id) {
+        return controlPersis.buscarCiudadanoPorId(id);
+    }
+
     public List<Ciudadano> traerTodosLosCiudadanos() {
         return controlPersis.traerCiudadanos();
     }
@@ -89,4 +90,50 @@ public class ControladoraLogica {
     public void modificarCiudadano(Ciudadano ciudadano) {
         controlPersis.modificarCiudadano(ciudadano);
     }
+
+    public void crearTurno(Turno turno) {
+        controlPersis.crearTurno(turno);
+    }
+
+    public List<Turno> traerTodosLosTurnos() {
+        return controlPersis.findTurnoEntities();
+    }
+
+    public Turno buscarTurnoPorId(long id) {
+        return controlPersis.buscarTurnoPorId(id);
+    }
+
+    public void eliminarTurno(long id) throws NonexistentEntityException {
+        controlPersis.eliminarTurno(id);
+    }
+
+    public void modificarTurno(Turno turno) {
+        controlPersis.modificarTurno(turno);
+    }
+
+    public List<Turno> traerTurnosPorEstado(String estado) {
+        try {
+            EstadoTurno estadoEnum = EstadoTurno.valueOf(estado.toUpperCase().replace(" ", "_"));
+            return controlPersis.traerTurnosPorEstado(estadoEnum, 100); 
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Estado no válido: " + estado, e);
+        }
+    }
+
+    public void marcarTurnoAtendido(long turnoId) {
+        Turno turno = buscarTurnoPorId(turnoId);
+        if (turno != null) {
+            turno.setEstado(EstadoTurno.YA_ATENDIDO);
+            controlPersis.modificarTurno(turno);
+        }
+    }
+
+    public void regresarTurnoEspera(long turnoId) {
+        Turno turno = buscarTurnoPorId(turnoId);
+        if (turno != null) {
+            turno.setEstado(EstadoTurno.EN_ESPERA);
+            controlPersis.modificarTurno(turno);
+        }
+    }
+
 }

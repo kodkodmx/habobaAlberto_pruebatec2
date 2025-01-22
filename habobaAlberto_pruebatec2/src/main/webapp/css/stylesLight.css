@@ -1,13 +1,15 @@
 body {
     background-color: black;
     background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
-    height: 100vh;
+    height: 100%;
     margin: 0;
-    overflow: hidden;
-    padding: 2rem;
+    padding: 0;
     color: white;
-    font: 1.3rem Inconsolata, monospace;
+    font: 1.1rem Inconsolata, monospace;
     text-shadow: 0 0 5px #C8C8C8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .animacion-label {
@@ -24,15 +26,15 @@ input[type="submit"] {
 
 .button-container {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: flex-start;
     align-items: center;
 }
 
 .button {
-    padding: 10px 20px;
+    padding: 8px 15px;
     font-family: "Inconsolata", monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     background-color: #151515;
     color: white;
     border: 1px dashed #00ff00;
@@ -48,7 +50,7 @@ input[type="submit"] {
 
 fieldset {
     border: 1px dashed #00ff00;
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
     text-shadow: 0 0 5px #00ff00;
@@ -57,14 +59,13 @@ fieldset {
 legend {
     color: #00ff00;
     font-family: "Inconsolata", monospace;
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-shadow: 0 0 5px #00ff00;
     padding: 0 10px;
 }
 
 fieldset:hover {
     border-color: #00cc00;
-    transition: border-color 0.3s;
 }
 
 #alerta {
@@ -78,23 +79,14 @@ h1 {
     margin-bottom: -20px;
 }
 
-/* Asegura que los botones se ubiquen en la misma línea y ocupen todo el espacio */
-fieldset {
-    display: flex;
-    gap: 10px; /* Espacio entre los botones */
-    justify-content: space-between; /* Distribuye los botones equitativamente */
-    flex-wrap: wrap; /* Asegura que si no caben todos, se acomoden a la siguiente línea */
-}
-
 input[type="submit"],
 button[type="submit"] {
-    flex: 1; /* Asegura que todos los botones ocupen el mismo tamaño */
     background-color: #00ff00;
     color: black;
     border: 2px solid #00cc00;
-    padding: 15px 20px; /* Aumenta el tamaño del botón */
+    padding: 8px 15px;
     font-family: "Inconsolata", monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     text-shadow: 0 0 5px #00ff00;
     transition: background-color 0.3s, color 0.3s;
@@ -107,9 +99,40 @@ button[type="submit"]:hover {
     border-color: #00ff00;
 }
 
+#menu {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#menu input[type="submit"],
+#menu button[type="submit"] {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    background-color: #00ff00;
+    color: black;
+    border: 2px solid #00cc00;
+    padding: 10px 15px;
+    font-family: "Inconsolata", monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-shadow: 0 0 5px #00ff00;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+    height: auto;
+    box-sizing: border-box;
+}
+
+#menu input[type="submit"]:hover,
+#menu button[type="submit"]:hover {
+    background-color: black;
+    color: #00ff00;
+    border-color: #00ff00;
+}
+
 .botonrojo {
-    background-color: red;
-    color: white;
+    background-color: red !important;
+    color: white !important;
 }
 
 table {
@@ -123,7 +146,7 @@ table {
 }
 
 th, td {
-    padding: 10px 15px;
+    padding: 8px 12px;
     text-align: left;
     border: 1px dashed #00FF00;
 }
@@ -145,6 +168,48 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
     background-color: rgba(0, 150, 0, 0.75);
     color: black;
+}
+
+select {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1em;
+    padding: 8px;
+    border: 2px dotted #00FF00;
+    border-radius: 4px;
+    background-color: #2C2C2C;
+    color: #00FF00;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    background-color: #3C3C3C;
+}
+
+select:focus {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    border-color: #00FF00;
+}
+
+input[type="date"] {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1em;
+    padding: 8px;
+    border: 2px dotted #00FF00;
+    border-radius: 4px;
+    background-color: #2C2C2C;
+    color: #00FF00;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="date"]:hover {
+    background-color: #3C3C3C;
+}
+
+input[type="date"]:focus {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    border-color: #00FF00;
 }
 
 footer {

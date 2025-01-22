@@ -2,21 +2,18 @@ package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
 import com.softek.logica.Ciudadano;
-import java.io.IOException;
+import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @WebServlet(name = "AltaCiudadanoSv", urlPatterns = {"/AltaCiudadanoSv"})
 public class AltaCiudadanoSv extends HttpServlet {
 
-    ControladoraLogica control = new ControladoraLogica();
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+    private final ControladoraLogica control = new ControladoraLogica();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,10 +25,20 @@ public class AltaCiudadanoSv extends HttpServlet {
 
         Ciudadano ciudadano = new Ciudadano(nombre, apellido, claveIdentificacion, null, true);
 
-
-        control.crearCiudadano(ciudadano);
-
-        response.sendRedirect("index.jsp?mens=Ciudadano Creado Exitosamente!");
+        try {
+            control.crearCiudadano(ciudadano);
+            response.sendRedirect("index.jsp?mens=Ciudadano Creado Exitosamente!");
+        } catch (PersistenceException e) {
+            Throwable cause = e.getCause();
+            while (cause != null) {
+                if (cause.getMessage() != null && cause.getMessage().contains("Duplicate entry")) {
+                    response.sendRedirect("altaCiudadano.jsp?mens=La clave de identificacion ya esta registrada.");
+                    return;
+                }
+                cause = cause.getCause();
+            }
+            response.sendRedirect("altaCiudadano.jsp?mens=Error al crear el ciudadano. Intentalo mas tarde.");
+        }
     }
 
     @Override
