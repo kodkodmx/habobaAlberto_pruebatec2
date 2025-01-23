@@ -142,3 +142,4 @@ Con este formato, el bloque está correctamente estructurado para incluir los co
 # Supuestos
 
 El usuario usa una pantalla con resolucion minima de 1920 x 1080 y en caso de no ser asi ajustara la vista con el zoom del navegador.
+Se preparan las clases para usar borrado logico pero por falta de tiempo para cumplir con el dead-line no se implementa la logica.
