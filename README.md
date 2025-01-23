@@ -4,6 +4,9 @@ Este proyecto es una aplicación web para la gestión de turnos, diseñada para 
 
 ---
 
+### Diagrama UML
+![UML](https://github.com/kodkodmx/habobaAlberto_pruebatec2/blob/f485673a3b608972fd0e6a25974995a13c33aa43/TurneroUML.png)
+
 ## Capturas de Pantalla
 
 ### Menú Principal
