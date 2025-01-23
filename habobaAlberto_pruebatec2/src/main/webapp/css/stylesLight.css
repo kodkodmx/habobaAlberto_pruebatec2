@@ -1,15 +1,13 @@
 body {
     background-color: black;
     background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
-    height: 100%;
+    height: 100vh;
     margin: 0;
-    padding: 0;
+    overflow: hidden;
+    padding: 2rem;
     color: white;
-    font: 1.1rem Inconsolata, monospace;
+    font: 1.3rem Inconsolata, monospace;
     text-shadow: 0 0 5px #C8C8C8;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .animacion-label {
@@ -26,15 +24,15 @@ input[type="submit"] {
 
 .button-container {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     justify-content: flex-start;
     align-items: center;
 }
 
 .button {
-    padding: 8px 15px;
+    padding: 10px 20px;
     font-family: "Inconsolata", monospace;
-    font-size: 0.9rem;
+    font-size: 1rem;
     background-color: #151515;
     color: white;
     border: 1px dashed #00ff00;
@@ -50,7 +48,7 @@ input[type="submit"] {
 
 fieldset {
     border: 1px dashed #00ff00;
-    padding: 15px;
+    padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     text-shadow: 0 0 5px #00ff00;
@@ -59,13 +57,14 @@ fieldset {
 legend {
     color: #00ff00;
     font-family: "Inconsolata", monospace;
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-shadow: 0 0 5px #00ff00;
     padding: 0 10px;
 }
 
 fieldset:hover {
     border-color: #00cc00;
+    transition: border-color 0.3s;
 }
 
 #alerta {
@@ -84,9 +83,9 @@ button[type="submit"] {
     background-color: #00ff00;
     color: black;
     border: 2px solid #00cc00;
-    padding: 8px 15px;
+    padding: 10px 20px;
     font-family: "Inconsolata", monospace;
-    font-size: 0.9rem;
+    font-size: 1rem;
     cursor: pointer;
     text-shadow: 0 0 5px #00ff00;
     transition: background-color 0.3s, color 0.3s;
@@ -99,28 +98,29 @@ button[type="submit"]:hover {
     border-color: #00ff00;
 }
 
+
 #menu {
     display: flex;
-    gap: 10px;
+    gap: 10px; 
     flex-wrap: wrap;
 }
 
 #menu input[type="submit"],
 #menu button[type="submit"] {
-    flex: 1 1 calc(50% - 10px);
-    max-width: calc(50% - 10px);
+    flex: 1 1 calc(25% - 10px);
+    max-width: calc(25% - 10px); 
     background-color: #00ff00;
     color: black;
     border: 2px solid #00cc00;
-    padding: 10px 15px;
+    padding: 15px 20px; /* Tamaño interno */
     font-family: "Inconsolata", monospace;
-    font-size: 0.9rem;
+    font-size: 1rem;
     cursor: pointer;
     text-shadow: 0 0 5px #00ff00;
     transition: background-color 0.3s, color 0.3s;
     text-align: center;
-    height: auto;
-    box-sizing: border-box;
+    height: auto; 
+    box-sizing: border-box; 
 }
 
 #menu input[type="submit"]:hover,
@@ -135,6 +135,11 @@ button[type="submit"]:hover {
     color: white !important;
 }
 
+.botonazul {
+    background-color: blue !important;
+    color: white !important;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -146,7 +151,7 @@ table {
 }
 
 th, td {
-    padding: 8px 12px;
+    padding: 10px 15px;
     text-align: left;
     border: 1px dashed #00FF00;
 }
@@ -172,8 +177,8 @@ tbody tr:hover {
 
 select {
     font-family: "Courier New", Courier, monospace;
-    font-size: 1em;
-    padding: 8px;
+    font-size: 1.1em;
+    padding: 10px;
     border: 2px dotted #00FF00;
     border-radius: 4px;
     background-color: #2C2C2C;
@@ -193,8 +198,8 @@ select:focus {
 
 input[type="date"] {
     font-family: "Courier New", Courier, monospace;
-    font-size: 1em;
-    padding: 8px;
+    font-size: 1.1em;
+    padding: 10px;
     border: 2px dotted #00FF00;
     border-radius: 4px;
     background-color: #2C2C2C;
@@ -211,6 +216,7 @@ input[type="date"]:focus {
     box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
     border-color: #00FF00;
 }
+
 
 footer {
     position: absolute;

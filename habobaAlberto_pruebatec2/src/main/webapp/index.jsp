@@ -35,7 +35,7 @@
             <form action="GestorTurnosSv" method="POST" id="retardo7">
                 <fieldset>
                     <legend>Turnos</legend>
-                    <button type="submit" name="action" value="alta" class="botonrojo">Agrega Turno</button>
+                    <button type="submit" name="action" value="alta" class="botonazul">Agrega Turno</button>
                     <button type="submit" name="action" value="listarTodos">Gestion de Turnos</button>
                     <button type="submit" name="action" value="listarEspera">Turnos Esperando</button>
                     <button type="submit" name="action" value="listarAtendidos">Turnos Atendidos</button>

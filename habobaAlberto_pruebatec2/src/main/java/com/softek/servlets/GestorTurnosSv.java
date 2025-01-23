@@ -8,6 +8,7 @@ import com.softek.logica.Turno.EstadoTurno;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,9 +89,13 @@ public class GestorTurnosSv extends HttpServlet {
 
     private void procesarListadoTurnos(String estado, HttpSession session, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Turno> turnos = "todos".equals(estado)
-                ? control.traerTodosLosTurnos()
-                : control.traerTurnosPorEstado(estado);
+        List<Turno> turnos = control.traerTodosLosTurnos();
+
+        if (!"todos".equals(estado)) {
+            turnos = turnos.stream()
+                    .filter(turno -> turno.getEstado().toString().equalsIgnoreCase(estado.replace(" ", "_")))
+                    .collect(Collectors.toList());
+        }
 
         session.setAttribute("listaTurnos", turnos);
         request.getRequestDispatcher("listarTurnos.jsp").forward(request, response);
