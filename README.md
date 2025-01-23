@@ -10,7 +10,7 @@ Este proyecto es una aplicación web para la gestión de turnos, diseñada para 
 ## Capturas de Pantalla
 
 ### Menú Principal
-![Menú Principal](https://github.com/kodkodmx/habobaAlberto_pruebatec2/blob/dd8050d1b125d38eb6a8a8009f311152b1056cb4/Captura%20de%20pantalla%202025-01-23%20110445.png)
+![Menú Principal](https://github.com/kodkodmx/habobaAlberto_pruebatec2/blob/main/Captura%20de%20pantalla%202025-01-23%20111026.png)
 
 ### Login
 ![Login](https://github.com/kodkodmx/habobaAlberto_pruebatec2/blob/dd8050d1b125d38eb6a8a8009f311152b1056cb4/Captura%20de%20pantalla%202025-01-23%20110445.png)
