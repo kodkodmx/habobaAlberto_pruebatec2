@@ -2,11 +2,7 @@ package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
 import com.softek.logica.Tramite;
-import com.softek.logica.Usuario;
-import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,12 +35,7 @@ public class BajaTramiteSv extends HttpServlet {
 
             String idString = request.getParameter("id");
             long id = Long.parseLong(idString);
-        try {
-            control.eliminaTramite(id);
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(BajaUsuarioSv.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
+            control.eliminaTramite(id);            
             response.sendRedirect("index.jsp?mens=Tramite eliminado con Exito!");
     }
 

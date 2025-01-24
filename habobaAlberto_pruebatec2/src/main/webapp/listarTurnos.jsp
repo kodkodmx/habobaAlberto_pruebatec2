@@ -46,7 +46,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Ciudadano</th>
-                    <th>Trámite</th>
+                    <th>Trámite - Descripción</th>
                     <th>Fecha</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -57,7 +57,7 @@
                 <tr>
                     <td><%= turno.getId()%></td>
                     <td><%= turno.getElCiudadano().getNombre()%></td>
-                    <td><%= turno.getElTramite().getNombre()%></td>
+                    <td><%= turno.getElTramite().getNombre() + " - " + turno.getElTramite().getDescripcion() %></td>
                     <td><%= turno.getFecha()%></td>
                     <td><%= turno.getEstado()%></td>
                     <td>

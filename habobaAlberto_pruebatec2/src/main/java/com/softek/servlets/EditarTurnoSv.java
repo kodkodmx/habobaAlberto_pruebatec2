@@ -43,7 +43,7 @@ public class EditarTurnoSv extends HttpServlet {
             request.getRequestDispatcher("editarTurno.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
-            response.sendRedirect("index.jsp?mens=Error: ID de turno inválido.");
+            response.sendRedirect("index.jsp?mens=Error: ID de turno invalido.");
         }
     }
 
@@ -98,7 +98,7 @@ public class EditarTurnoSv extends HttpServlet {
             response.sendRedirect("GestorTurnosSv?action=listarTodos");
 
         } catch (NumberFormatException e) {
-            response.sendRedirect("index.jsp?mens=Error: ID de turno inválido.");
+            response.sendRedirect("index.jsp?mens=Error: ID de turno invalido.");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("index.jsp?mens=Error al procesar la solicitud.");

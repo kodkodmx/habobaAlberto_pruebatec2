@@ -1,7 +1,6 @@
 package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
-import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +22,8 @@ public class BajaTurnoSv extends HttpServlet {
             long turnoId = Long.parseLong(turnoIdParam);
             control.eliminarTurno(turnoId);
             response.sendRedirect("GestorTurnosSv?action=baja&mens=Turno eliminado exitosamente!");
-        } catch (NonexistentEntityException e) {
-            response.sendRedirect("GestorTurnosSv?action=baja&mens=Error: El turno no existe.");
         } catch (NumberFormatException e) {
-            response.sendRedirect("GestorTurnosSv?action=baja&mens=Error: ID de turno inválido.");
+            response.sendRedirect("GestorTurnosSv?action=baja&mens=Error: ID de turno invalido.");
         }
     }
 

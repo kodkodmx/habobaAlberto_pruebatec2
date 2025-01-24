@@ -2,7 +2,6 @@ package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
 import com.softek.logica.Ciudadano;
-import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,6 +51,6 @@ public class EditarCiudadanoSv extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet para gestionar la edición de ciudadanos.";
+        return "Servlet para gestionar la edicion de ciudadanos.";
     }
 }

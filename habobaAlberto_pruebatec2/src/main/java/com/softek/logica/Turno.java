@@ -113,7 +113,7 @@ public class Turno implements Serializable {
         this.disponible = disponible;
     }
 
-    public enum EstadoTurno {
+    public enum EstadoTurno {   //Use enums porque permiten manejar valores fijos de forma segura y legible.
         EN_ESPERA,
         YA_ATENDIDO
     }

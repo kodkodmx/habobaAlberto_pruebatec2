@@ -59,6 +59,6 @@ public class EditarUsuarioSv extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet para gestionar la eliminación de usuarios.";
+        return "Servlet para gestionar la eliminacion de usuarios.";
     }
 }

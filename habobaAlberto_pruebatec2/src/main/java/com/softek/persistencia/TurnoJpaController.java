@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -59,7 +58,7 @@ public class TurnoJpaController implements Serializable {
             em.getTransaction().begin();
             Turno persistentTurno = em.find(Turno.class, turno.getId());
             if (persistentTurno == null) {
-                throw new NonexistentEntityException("El turno con ID " + turno.getId() + " no existe.");
+                throw new NonexistentEntityException("The turno with id " + turno.getId() + " no longer exists.");
             }
             if (turno.getElUsuario() != null) {
                 turno.setElUsuario(em.getReference(Usuario.class, turno.getElUsuario().getId()));
@@ -86,7 +85,7 @@ public class TurnoJpaController implements Serializable {
             em.getTransaction().begin();
             Turno turno = em.find(Turno.class, id);
             if (turno == null) {
-                throw new NonexistentEntityException("El turno con ID " + id + " no existe.");
+                throw new NonexistentEntityException("The turno with id " + id + " no longer exists.");
             }
             em.remove(turno);
             em.getTransaction().commit();

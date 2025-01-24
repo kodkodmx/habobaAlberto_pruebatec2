@@ -27,8 +27,12 @@ public class ControladoraLogica {
         return controlPersis.buscarUsuario(email);
     }
 
-    public void eliminaUsuario(long id) throws NonexistentEntityException {
-        controlPersis.eliminarUsuario(id);
+    public void eliminaUsuario(long id) {
+        try {
+            controlPersis.eliminarUsuario(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Usuario> traerTodosLosUsuarios() {
@@ -47,8 +51,12 @@ public class ControladoraLogica {
         controlPersis.crearTramite(tramite);
     }
 
-    public void eliminaTramite(long id) throws NonexistentEntityException {
-        controlPersis.eliminarTramite(id);
+    public void eliminaTramite(long id) {
+        try {
+            controlPersis.eliminarTramite(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Tramite buscaTramite(String nombre) {
@@ -63,7 +71,7 @@ public class ControladoraLogica {
         return controlPersis.traerTramites();
     }
 
-    public void modificarTramite(Tramite tramite) throws Exception {
+    public void modificarTramite(Tramite tramite) {
         controlPersis.modificarTramite(tramite);
     }
 
@@ -83,8 +91,12 @@ public class ControladoraLogica {
         return controlPersis.traerCiudadanos();
     }
 
-    public void eliminarCiudadano(long id) throws NonexistentEntityException {
-        controlPersis.eliminarCiudadano(id);
+    public void eliminarCiudadano(long id) {
+        try {
+            controlPersis.eliminarCiudadano(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void modificarCiudadano(Ciudadano ciudadano) {
@@ -103,8 +115,12 @@ public class ControladoraLogica {
         return controlPersis.buscarTurnoPorId(id);
     }
 
-    public void eliminarTurno(long id) throws NonexistentEntityException {
-        controlPersis.eliminarTurno(id);
+    public void eliminarTurno(long id) {
+        try {
+            controlPersis.eliminarTurno(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraLogica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void modificarTurno(Turno turno) {

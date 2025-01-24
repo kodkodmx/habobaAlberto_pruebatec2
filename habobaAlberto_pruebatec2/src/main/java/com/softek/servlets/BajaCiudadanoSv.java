@@ -2,10 +2,7 @@ package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
 import com.softek.logica.Ciudadano;
-import com.softek.persistencia.exceptions.NonexistentEntityException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +35,7 @@ public class BajaCiudadanoSv extends HttpServlet {
 
             String idString = request.getParameter("id");
             long id = Long.parseLong(idString);
-        try {
-            control.eliminarCiudadano(id);
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(BajaCiudadanoSv.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
+            control.eliminarCiudadano(id);           
             response.sendRedirect("index.jsp?mens=Ciudadano eliminado con Exito!");
     }
 

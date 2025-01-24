@@ -38,6 +38,6 @@ public class LoginSv extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet de inicio de sesión";
+        return "Servlet de inicio de sesion";
     }
 }

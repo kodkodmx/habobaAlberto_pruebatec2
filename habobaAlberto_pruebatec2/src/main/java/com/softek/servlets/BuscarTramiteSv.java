@@ -2,7 +2,6 @@ package com.softek.servlets;
 
 import com.softek.logica.ControladoraLogica;
 import com.softek.logica.Tramite;
-import com.softek.logica.Usuario;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -49,6 +48,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
     @Override
     public String getServletInfo() {
-        return "Servlet para gestionar la eliminación de tramites.";
+        return "Servlet para gestionar la eliminacion de tramites.";
     }
 }

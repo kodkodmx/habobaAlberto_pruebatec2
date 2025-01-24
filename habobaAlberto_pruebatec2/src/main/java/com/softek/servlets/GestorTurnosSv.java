@@ -86,13 +86,14 @@ public class GestorTurnosSv extends HttpServlet {
             response.sendRedirect("error.jsp?mens=Error procesando la solicitud.");
         }
     }
-
+    
+    //uso de programacion funcional con lambdas y streams para dar formato a los estados en la lista al formato de los ENUMS
     private void procesarListadoTurnos(String estado, HttpSession session, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Turno> turnos = control.traerTodosLosTurnos();
 
-        if (!"todos".equals(estado)) {
-            turnos = turnos.stream()
+        if (!"todos".equals(estado)) { 
+            turnos = turnos.stream() 
                     .filter(turno -> turno.getEstado().toString().equalsIgnoreCase(estado.replace(" ", "_")))
                     .collect(Collectors.toList());
         }
@@ -137,7 +138,7 @@ public class GestorTurnosSv extends HttpServlet {
 
             response.sendRedirect("GestorTurnosSv?action=listarTodos");
         } catch (NumberFormatException e) {
-            response.sendRedirect("index.jsp?mens=Error: ID de turno inválido.");
+            response.sendRedirect("index.jsp?mens=Error: ID de turno invalido.");
         } catch (Exception e) {
             response.sendRedirect("index.jsp?mens=Error al procesar la solicitud.");
         }
@@ -158,7 +159,7 @@ public class GestorTurnosSv extends HttpServlet {
 
             response.sendRedirect("GestorTurnosSv?action=listarTodos");
         } catch (NumberFormatException e) {
-            response.sendRedirect("index.jsp?mens=Error: ID de turno inválido.");
+            response.sendRedirect("index.jsp?mens=Error: ID de turno invalido.");
         } catch (Exception e) {
             response.sendRedirect("index.jsp?mens=Error al eliminar el turno.");
         }
@@ -173,6 +174,6 @@ public class GestorTurnosSv extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Redirecciona a las paginas de gestión de turnos.";
+        return "Redirecciona a las paginas de gestion de turnos.";
     }
 }
